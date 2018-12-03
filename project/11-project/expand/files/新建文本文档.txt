@@ -1,0 +1,22 @@
+<style>
+.storageDetailsDatabase .link ul li, .storageDetailsDatabase .txtbox ul li{
+    position: relative;
+    text-align: left;
+    float: none;
+    line-height: 1.75;
+    position: relative;
+    padding: 0 0 0 25px;
+    width: 100%;
+}
+
+.storageDetailsDatabase .link ul li:after, .storageDetailsDatabase .txtbox ul li:after {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+    width: 5px;
+    height: 5px;
+    content: '';
+    border-radius: 100%;
+    background: #999;
+}
+</style>

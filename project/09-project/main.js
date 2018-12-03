@@ -1,0 +1,23 @@
+var fs = require('fs');
+var data = '';
+
+//创建可读流
+var readerStream = fs.createReadStream('input.txt');
+
+//设置编码为utf-8
+readerStream.setEncoding('UTF-8');
+
+//处理流文件 --> data, end, and err
+readerStream.on('data', function (chunk) {
+    data += chunk;
+});
+
+readerStream.on('end', function() {
+  console.log('show', data);
+});
+
+readerStream.on('error', function (err) {
+    console.log(err.stack);
+});
+
+console.log('程序执行完毕');
