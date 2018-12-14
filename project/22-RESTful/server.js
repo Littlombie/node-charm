@@ -2,6 +2,8 @@ var express = require('express');
 var app = express();
 var  fs = require('fs');
 
+
+// 获取用户列表
 app.get('/listUsers', function (req, res) {
   fs.readFile(__dirname + "/" + "users.json", "utf8", function (err, data) {
     console.log(data);
@@ -29,7 +31,20 @@ app.get('/addUser', function (req, res) {
   });
 });
 
-// 显示用户详情
+// 删除用户
+let id = 2;
+app.get('/deleteUser', function (req, res) {
+  // 首先去读已存在的用户
+  fs.readFile(__dirname + '/' + 'users.json', 'utf8', function (err, data) {
+    data = JSON.parse(data);
+    delete data['user' + 2];
+
+    console.log(data);
+    res.end(JSON.stringify(data));
+  })
+})
+
+// 查询用户信息 （放到前边会拦截其他请求）
 app.get('/:id', function (req, res) {
   // 首先我们读取已存在的用户
   fs.readFile(__dirname + '/' + 'users.json', 'utf8', function(err, data) {
@@ -40,19 +55,7 @@ app.get('/:id', function (req, res) {
   });
 });
 
-// 删除用户
-let id = 2;
-app.get('/deleteUser', function (req, res) {
-  // 首先去读已存在的用户
-  fs.readFile(__dirname + '/' + 'users.json', 'utf8', function (err, data) {
-    data = JSON.parse(data);
-    delete data['user' + 2];
-    
-    console.log(data);
-    res.end(JSON.stringify(data));
-  })
-})
-
+// 监听
 var server = app.listen(8081, function () {
   var host = server.address().address;
   var port = server.address().prot;
