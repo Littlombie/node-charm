@@ -11,3 +11,4 @@ MongoClient.connect(url, function (err, db) {
         db.close();
     });
 });
+// 使用终端打开 mongo.exe 运行show dbs 查看创建的库
