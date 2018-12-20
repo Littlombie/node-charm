@@ -1,0 +1,10 @@
+{
+    "name": "node-learnning",
+    "version": "1.0.0",
+    "description": "study nodejs",
+    "author": "dean wen",
+    "private": true,
+    "scripts": {
+        "client": "node  client/app.js"
+    }
+}
