@@ -5,6 +5,12 @@
     "author": "dean wen",
     "private": true,
     "scripts": {
-        "client": "node  client/app.js"
+        "client": "node  client/app.js",
+        "zip": "node ./project/12-node-zip-unzip/main4.js"
+    },
+    "dependencies": {
+        "axios": "^0.18.0",
+        "bootstrap": "^3.3.5",
+        "zip-local": "^0.3.4"
     }
 }

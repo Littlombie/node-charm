@@ -8,6 +8,7 @@ const fs = require('fs');
 
 const path = require('path');
 
+
 console.log( path.join(__dirname, 'public'))
 /* 
  2.获取服务器对象
@@ -61,7 +62,7 @@ server.on('request', function (request, response) {
     let url = request.url;
     const viewPath = `${__dirname}/views`;
     
-    console.log('lalalala',viewPath+ url,  fs.existsSync(viewPath+ url));
+    // console.log('lalalala',viewPath+ url,  fs.existsSync(viewPath+ url));
     if (url === '/') {
         // response.writeHead(响应状态码，相应头对象)：发送一个像迎头给请求
         response.writeHead(200, {'Content-Type': 'text/html'})
