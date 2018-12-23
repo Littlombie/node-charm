@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+// const axios = require('axios');
+
 axios({
   method: 'GET',
   url: '../data/test.json'
