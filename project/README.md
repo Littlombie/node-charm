@@ -1,3 +1,6 @@
+## nodejs学习代码整理
+本代码整理是按照[菜鸟教程](http://www.runoob.com/nodejs/nodejs-tutorial.html)中`nodejs`的教程学习整理，内容涉及粗浅，只适合了解nodejs的基础概念知识框架，从而去逐个深入了解
+
 ## 文件目录
 ```
 ├── 00-video-learnning ------------- 视频学习整理
