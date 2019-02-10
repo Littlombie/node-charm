@@ -1,8 +1,5 @@
-import axios from 'axios';
 
-// const axios = require('axios');
-
-axios({
+const axios = ({
   method: 'GET',
   url: '../data/test.json'
 }).then( resp => {
@@ -10,3 +7,5 @@ axios({
 }).catch(err => {
   console.log(errr);
 })
+
+export default axios;
