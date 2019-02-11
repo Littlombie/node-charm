@@ -8,8 +8,9 @@ const fs = require('fs');
 
 const path = require('path');
 
-import axios from '/node_modules/axios/dist/axios.js';
-import login from './public/js/login.js'
+const axios = require('axios');
+
+// import login from '/js/login.js';
 
 console.log( path.join(__dirname, 'public'))
 /* 
