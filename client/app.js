@@ -7,6 +7,7 @@ const http = require('http');
 const fs = require('fs');
 
 const path = require('path');
+const colors = require('colors');
 
 const axios = require('axios');
 
@@ -25,6 +26,12 @@ console.log( path.join(__dirname, 'public'))
       2.处理客户端发来的请求
       3.向客户端发送响应
 */ 
+const devWebpackConfig = {
+    devServer: {
+        'host': 'localhost',
+        'port': '2580'
+    }
+}
 const server = http.createServer();
 
 /* 
@@ -40,9 +47,9 @@ const server = http.createServer();
     如果port省略或是0，系统会随意分配一个在‘listening’时间出发后能被server.address().port检索的无用端口。
     如果host省略，如果IPv6可用，服务器将会接收基于upspecified IPv6 address (::) 的连接，否则接收基于unspecified IPV4 address（0）
 */
-server.listen(2580, function () {
-    console.log('服务器正在端口号：2580 上运行……');
-})
+server.listen(devWebpackConfig.devServer.port, function () {
+    console.log(`Your application is running here: http://${devWebpackConfig.devServer.host}:${devWebpackConfig.devServer.port}`.blue);
+});
 
 /* 
  4.给server实例对象添加request请求事件，该请求时间是所有请求的入口
@@ -96,21 +103,18 @@ server.on('request', function (request, response) {
     }
 });
 
-
-
-
-    // else if (url === '/login') {
-    //     response.writeHead(200, {'Content-Type': 'text/html'});
-    //     // 如果url= '/'，读取指定文件下的html文件，渲染到页面
-    //     fs.readFile( viewPath + '/login.html', 'UTF8', function (err, data) {
-    //         if (err) throw err;
-    //         response.end(data);
-    //     })
-    // } else if (url === '/index') {
-    //     response.writeHead(200, {'Content-Type': 'text.html'});
-    //     // 如果url='/' ，读取指定文件下的html文件，渲染到页面
-    //     fs.readFile(viewPath + '/index.html','UTF8', function(err, data) {
-    //         if (err) throw err;
-    //         response.end(data);
-    //     })
-    // }
+// else if (url === '/login') {
+//     response.writeHead(200, {'Content-Type': 'text/html'});
+//     // 如果url= '/'，读取指定文件下的html文件，渲染到页面
+//     fs.readFile( viewPath + '/login.html', 'UTF8', function (err, data) {
+//         if (err) throw err;
+//         response.end(data);
+//     })
+// } else if (url === '/index') {
+//     response.writeHead(200, {'Content-Type': 'text.html'});
+//     // 如果url='/' ，读取指定文件下的html文件，渲染到页面
+//     fs.readFile(viewPath + '/index.html','UTF8', function(err, data) {
+//         if (err) throw err;
+//         response.end(data);
+//     })
+// }
