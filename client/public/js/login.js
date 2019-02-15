@@ -15,7 +15,25 @@ window.onload = function () {
       console.log(err);
     }
   });
+  let [submit,username,password] = [
+      document.querySelector('#submit'),
+      document.querySelector("input['name=username']").value,
+      document.querySelector("input['name=password']").value
+    ];
+  submit.addEventListener('click', function (e) {
+    console.log(1,username,password);
+    e.preventDefault();
+    // if (username == null || username == '') {
+    //     console.log('请输入用户名');
+    //     return false;
+    // }
+    // if (password == null || password == '') {
+    //     console.log('请输入密码');
+    //     return false;
+    // }
+  })
 }
+
 
 function ajax(obj){
   var parameter = { //参数的对象。
