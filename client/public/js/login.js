@@ -40,8 +40,20 @@ window.onload = function () {
         data.username = valid(username);
         data.password = valid(password);
         console.log(data);
+        ajax({
+            method:'POST',
+            url: '',
+            data: data,
+            success: function (resp) {
+                console.log(resp);
+            },
+            fail: function (err) {
+
+            }
+        });
+
     })
-}
+};
 
 
 function ajax(obj) {
