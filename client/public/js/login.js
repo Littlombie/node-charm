@@ -1,7 +1,8 @@
 window.onload = function () {
     ajax({
         method: 'GET',
-        url: '../data/test.json',
+        // url: '../data/test.json',
+        url:'localhost:5552/list',
         type: 'json',
         success: function (resp) {
             console.log(resp);
