@@ -1,6 +1,6 @@
 var http = require('http');
+var url = require('url');
 
-const server = http.createServer();
 
 var config = {
   devServer : {
@@ -9,7 +9,7 @@ var config = {
   }
 } 
 
-var questions = [
+var json = [
   {
   data:213,
   num:444,
@@ -21,13 +21,28 @@ var questions = [
   age:13
   }];
 
-server.get('/list', function (req, res) {
-  res.status(200);
-  res.json(questions);
+const server = http.createServer(function (req, res) {
+  var pathname = url.parse(req.url).pathname;
+  console.log(pathname);
+  //这里是获取请求的来源:比如访问来源为http://localhost:5552/text.html 会得到/text.html,所以这里可以用pathname来判断来自不同访问来源来做响应操作
+  res.writeHead(200, {'Content-type': 'text/html'});
+  var url_info = require('url').parse(req.url, true);
+  if (pathname == "/list") {
+    var post_data = require('querystring').stringify(url_info.query);
+    console.log('参数:'+post_data);
+    res.writeHead(200, {"Content-Type": "application/json"});
+    console.log(JSON.stringify(json));
+    res.end(json);
+  }
 });
 
+// server.get('/list', function (req, res) {
+//   res.status(200);
+//   res.json(questions);
+// });
+
 server.listen(config.devServer.port, function () {
-  console.log('Server start!');
+  console.log('Server start! http://localhost:5552/');
 });
 
 
