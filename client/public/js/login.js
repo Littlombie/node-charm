@@ -3,7 +3,7 @@ window.onload = function () {
         method: 'GET',
         // url: '../data/test.json',
         url:'localhost:5552/list',
-        type: 'json',
+        // type: 'json',
         success: function (resp) {
             console.log(resp);
             if (resp) {
