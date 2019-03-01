@@ -1,10 +1,10 @@
 var http = require('http');
 var url = require('url');
-var api = require('./router/api');
-var static = require('./router/static');
+var api = require('./route/api');
+var static = require('./route/static');
 
 // 匹配静态文件夹路径的正则表达式，用于判断请求是否是静态文件
-var staticExp = /\/public\/(img/js/css)\/[a-z]*\.(jpg|png|gif|svg|js|css)/;
+var staticExp = /\/public\/(img|js|css)\/[a-z]*\.(jpg|png|gif|svg|js|css)/;
 
 http.createServer((req, res) => {
     var pathname = url.parse(req.url).pathname;
