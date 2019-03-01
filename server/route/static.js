@@ -11,9 +11,9 @@ MIME['.svg'] = 'image/svg';
 
 function get (pathname, res) {
   if (fs.existsSync(pathname)) { // 检测目录是否存在
-    var extname = path.extname(pathname);
-    res.wirteHead(200, {'Content-type': extname});
-    fs.readFile(pathname, (req, res) => {
+    var extname = path.extname(pathname); // 返回文件的扩展名
+    res.writeHead(200, {'Content-Type': MIME[extname]});
+    fs.readFile(pathname, (err, data) => {
       if (err) {
         console.log(err);
         res.end();
