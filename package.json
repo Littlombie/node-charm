@@ -6,6 +6,7 @@
     "private": true,
     "scripts": {
         "client": "node  client/app.js",
+        "server": "node  server/server.js",
         "zip": "node ./project/12-node-zip-unzip/main4.js",
         "unzip": "node ./project/12-node-zip-unzip/main5.js"
     },
