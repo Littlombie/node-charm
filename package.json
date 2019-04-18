@@ -8,7 +8,8 @@
         "client": "node  client/app.js",
         "server": "node  server/server.js",
         "zip": "node ./project/12-node-zip-unzip/main4.js",
-        "unzip": "node ./project/12-node-zip-unzip/main5.js"
+        "unzip": "node ./project/12-node-zip-unzip/main5.js",
+        "renamefile": "node ./project/25-renamefiles/renamefiles.js"
     },
     "dependencies": {
         "anywhere": "^1.5.0",
