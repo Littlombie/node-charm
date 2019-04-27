@@ -5,15 +5,29 @@
 const http = require('http');
 // 声明文件操作系统对象
 const fs = require('fs');
-
+const os = require('os');
 const path = require('path');
 const colors = require('colors');
-
 const axios = require('axios');
 
-// import login from '/js/login.js';
-
 console.log( path.join(__dirname, 'public'))
+
+console.log(os.networkInterfaces().en0[1].address, '\n', os.cpus()[0].model, '\n', os.freemem(),'\n', os.homedir(), '\n', os.platform(),'\n', os.hostname());
+
+// 获取电脑的ip地址
+let hosts = '';
+
+if (os.networkInterfaces().en0[1].address !=''&& os.networkInterfaces().en0[1].address != undefined) {
+    hosts = os.networkInterfaces().en0[1].address;
+}
+
+const oOs = JSON.stringify(os.networkInterfaces()).replace(/\,/g,',\n').replace(/\{/g,'{\n').replace(/\}/g,'}\n');
+
+fs.writeFile('./client/public/json/os.json', oOs, (err) => {
+    if (err) {
+        throw err;
+    }
+});
 /* 
  2.获取服务器对象
    1.通过http.createServer([requestListener]) 创建一个服务
@@ -28,7 +42,7 @@ console.log( path.join(__dirname, 'public'))
 */ 
 const devWebpackConfig = {
     devServer: {
-        'host': 'localhost',
+        'host': hosts,
         'port': '2580'
     }
 }
