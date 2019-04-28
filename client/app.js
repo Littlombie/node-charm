@@ -7,18 +7,25 @@ const http = require('http');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const colors = require('colors');
-const axios = require('axios');
 
-console.log( path.join(__dirname, 'public'))
+const ipArr = require('../project/26-os/01-getIp');
+// import ipArr from '../project/26-os/01-getIp';
+// const colors = require('colors');
+// const axios = require('axios');
 
-console.log(os.networkInterfaces().en0[1].address, '\n', os.cpus()[0].model, '\n', os.freemem(),'\n', os.homedir(), '\n', os.platform(),'\n', os.hostname());
+console.log( path.join(__dirname, 'public'),'--', ipArr)
+
+// console.log(os.networkInterfaces());
+// console.log(os.networkInterfaces().en0[1].address, '\n', os.cpus()[0].model, '\n', os.freemem(),'\n', os.homedir(), '\n', os.platform(),'\n', os.hostname());
+
+// if (os.networkInterfaces().en0[1].address !=''&& os.networkInterfaces().en0[1].address != undefined) {
+//     hosts = os.networkInterfaces().en0[1].address;
+// }
 
 // 获取电脑的ip地址
 let hosts = '';
-
-if (os.networkInterfaces().en0[1].address !=''&& os.networkInterfaces().en0[1].address != undefined) {
-    hosts = os.networkInterfaces().en0[1].address;
+if (ipArr.length > 0) {
+    hosts = ipArr[0];
 }
 
 const oOs = JSON.stringify(os.networkInterfaces()).replace(/\,/g,',\n').replace(/\{/g,'{\n').replace(/\}/g,'}\n');
@@ -31,7 +38,6 @@ fs.writeFile('./client/public/json/os.json', oOs, (err) => {
 /* 
  2.获取服务器对象
    1.通过http.createServer([requestListener]) 创建一个服务
-    
      requestListener<Function>
      返回：<http.Server>
      返回一个新建的http.Server实例
@@ -46,6 +52,7 @@ const devWebpackConfig = {
         'port': '2580'
     }
 }
+
 const server = http.createServer();
 
 /* 
