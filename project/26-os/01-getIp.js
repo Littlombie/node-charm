@@ -6,6 +6,7 @@ const ifaces = os.networkInterfaces();
 var obArr = Object.keys(ifaces);
 var newArr= [];
 
+console.log(obArr,ifaces);
 let uq = (arr, arr1) => {
     //将arr数组转换成set对象
     setObj = new Set(arr);
@@ -22,10 +23,13 @@ let uq = (arr, arr1) => {
 for (let i = 0; i < obArr.length - 1; i++ ) {
 
     // console.log(i, '--', ifaces[obArr[i]])
-    newArr =  uq(ifaces[obArr[i]],ifaces[obArr[i + 1]])
+    // newArr =  uq(ifaces[obArr[i]],ifaces[obArr[i + 1]])
+    for (let x = 0; x < ifaces[obArr[i]].length; x++) {
+        newArr.push(ifaces[obArr[i]][x]);
+    }
 } 
 
-// console.log(newArr);
+// console.log('--',newArr);
 let newArr2 = [];
 for (let i = 0; i < newArr.length; i++) {
     // console.log(ifaces['internal']);
@@ -34,7 +38,7 @@ for (let i = 0; i < newArr.length; i++) {
     }
 }
 
-// console.log('1111', newArr2);
+console.log('1111', newArr2);
 
 // export default ipArr = newArr2
 exports = module.exports = ipArr = newArr2;
