@@ -52,13 +52,13 @@
 "cidr":"192.168.0.103/24"}
 ],
 "awdl0":[{
-"address":"fe80::ec55:58ff:fe36:f6fb",
+"address":"fe80::24b6:99ff:fe5c:6319",
 "netmask":"ffff:ffff:ffff:ffff::",
 "family":"IPv6",
-"mac":"ee:55:58:36:f6:fb",
+"mac":"26:b6:99:5c:63:19",
 "scopeid":12,
 "internal":false,
-"cidr":"fe80::ec55:58ff:fe36:f6fb/64"}
+"cidr":"fe80::24b6:99ff:fe5c:6319/64"}
 ],
 "utun0":[{
 "address":"fe80::7047:80d0:177c:698e",

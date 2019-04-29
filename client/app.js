@@ -10,7 +10,8 @@ const path = require('path');
 
 const ipArr = require('../project/26-os/01-getIp');
 // import ipArr from '../project/26-os/01-getIp';
-const colors = require('colors');
+// const colors = require('colors');
+const chalk = require('chalk');
 // const axios = require('axios');
 
 console.log( path.join(__dirname, 'public'),'--', ipArr)
@@ -69,7 +70,7 @@ const server = http.createServer();
     如果host省略，如果IPv6可用，服务器将会接收基于upspecified IPv6 address (::) 的连接，否则接收基于unspecified IPV4 address（0）
 */
 server.listen(devWebpackConfig.devServer.port, function () {
-    console.log('Your application is running here: '+(devWebpackConfig.devServer.host+':'+ devWebpackConfig.devServer.port).blue);
+    console.log(chalk.blue(`Your application is running here: ${devWebpackConfig.devServer.host}:${devWebpackConfig.devServer.port}`));
 });
 
 /* 
