@@ -1,105 +1,64 @@
-var http = require('http');
-var url = require('url');
-var querystring =  require('querystring') 
 
-var config = {
-  devServer : {
-    host: 'localhost',
-    port: '5552'
-  }
-} 
+const queryString = require('querystring');
+const handleUserRouter = require('./router/user');
 
-var json = [{
-    data: 213,
-    num: 444,
-    age: 12
-  },
-  {
-    data: 456,
-    num: 678,
-    age: 13
-  }
-];
+// 用于处理post data 
+const getPostData = (req) => {
+    const promise = new Promise ((resolve, reject) => {
+        // 判断不是post请求
+        if (req.method !== 'POST') {
+            resolve({});
+            return;
+        }
+        // console.log(req.headers);
+        if (req.headers['content-type'] !== 'application/json') {
+            resolve({});
+            return;
+        }
 
-const server = http.createServer(function (req, res) {
-  var pathname = url.parse(req.url).pathname;
-  //这里是获取请求的来源:比如访问来源为http://localhost:5552/text.html 会得到/text.html,所以这里可以用pathname来判断来自不同访问来源来做响应操作
-  res.writeHead(200, {'Content-type': 'text/html'});
-  var url_info = url.parse(req.url, true);
-  console.log(url_info);
-  if (pathname == "/list") {
-    // var post_data = querystring.stringify(url_info.query);
-    console.log('参数:' + aa);
-    // res.writeHead(200, {"Content-Type": "application/json"});
-    // console.log(JSON.stringify(json));
-    // res.end(json);
-  }
-});
+        let postData = '';
+        req.on('data', chunk => {
+            postData += chunk.toString();
+        })
+        req.on('end', () => {
+            if (!postData) {
+                resolve({});
+                return;
+            }
+            resolve(
+              JSON.parse(postData)
+            )
+        })
+        
+    })
+    return promise;
+}
+const serverHandle = (req, res) => {
 
-// server.get('/list', function (req, res) {
-//   res.status(200);
-//   res.json(questions);
-// });
+    res.setHeader('Content-Type', 'application/json'); // 设置返回格式 JSON
+    res.setHeader("Access-Control-Allow-Origin", "*");  // 设置允许跨域    
+    res.setHeader("Access-control-Allow-Headers", "xCors");    // 允许请求头中携带 xCors
+    res.setHeader("Access-Control-Allow-Methods", "GET,POST,DELETE,PUT,OPTIONS,HEAD,FETCH"); // 设置允许声明的方法访问
 
-server.listen(config.devServer.port, function () {
-  console.log('Server start! http://localhost:5552/');
-});
+    // 获取 path
+    const url = req.url;
+    req.path = url.split('?')[0];
 
+    // 解析query
+    req.query = queryString.parse(url.split('?')[1]);
 
-// //需要下载引用的model
-// var http = require('http');
-// var url = require('url');
+    getPostData(req).then(postData => {
+        req.body = postData;
 
-// //创建服务器
-// var server = http.createServer(function(req, res) {
-//     var pathname = url.parse(req.url).pathname;
-//    //这里是获取请求的来源:比如访问来源为http://localhost:443/text.html 会得到/text.html,所以这里可以用pathname来判断来自不同访问来源来做响应操作
-//     res.writeHead(200, {'Content-type': 'text/html'});
-//     var url_info = require('url').parse(req.url, true);
-   
-//     if (pathname == "/index.html") {
-// //接收get提交过来的参数,自己将对方的数据进行对应操作
-// var post_data = require('querystring').stringify(url_info.query);
-// console.log('参数:'+post_data);
-//        //这里返回json数据
-// res.writeHead(200, {"Content-Type": "application/json"});
-//         var otherObject = { A1: "a1", B1: "b1" };
-//         var otherArray = ["a", "b"];
-//         var json = JSON.stringify({
-//             anObject: otherObject,
-//             anArray: otherArray,
-//          });
-//         console.log(JSON.stringify(json));
-//         res.end(json);
-//   });  
-//     } else if(pathname=="/text.html") {
-//         //返回网页数据
-//         res.writeHead(200, {'Content-Type': 'text/html'});
-//         res.write('<head><meta charset="utf-8"/></head>');
-//         res.write('<h1>Node.js</h1>');
-//         res.write('<b>亲爱的，你慢慢飞，小心前面带刺的玫瑰...</b>');
-//         res.end('<p>Hello World</p>');
-//     }
+        // 处理user路由
+        const userData = handleUserRouter(req, res);
+        if (userData) {
+            res.end (
+                JSON.stringify(userData)
+            )
+        }
+        return;
+    })
+}
 
-
-// //这个方法可以捕捉POST请求
-//     req.addListener('data', function (chunk) {
-// //chunk就是对方post提交的参数
-//         console.log('post提交数据：' + chunk);
-// //进行相应数据操作后,返回数据
-// res.writeHead(200, {"Content-Type": "application/json"});
-//         var otherObject = { item1: "item1val", item2: "item2val" };
-//         var otherArray = ["item1", "item2"];
-//         var json = JSON.stringify({
-//             anObject: otherObject,
-//             anArray: otherArray,
-//          });
-//         console.log(JSON.stringify(json));
-//         res.end(json);
-//   });  
-//     });
-// }).listen(443, function() {
-//     console.log('Listening at: http://localhost:443');
-
-// });
-
+module.exports = serverHandle;
