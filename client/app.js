@@ -7,10 +7,14 @@ const http = require('http');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-
 const ipArr = require('../project/26-os/01-getIp');
-// import ipArr from '../project/26-os/01-getIp';
-// const colors = require('colors');
+const queryString = require('querystring');
+const newServer = require('./router/page');
+
+// 设置输出的颜色样式
+const colors = require('colors');
+
+// 设置输出的颜色样式
 const chalk = require('chalk');
 // const axios = require('axios');
 
@@ -54,7 +58,18 @@ const devWebpackConfig = {
     }
 }
 
-const server = http.createServer();
+const server = http.createServer((req,res)=> {
+    let url = req.url;
+    const path = url.split('?')[0];
+    const query = queryString.parse(url.split('?')[1]);
+    req.path = path;
+    req.query = query;
+    req.viewPath = `${__dirname}`;
+    
+});
+
+
+
 
 /* 
   3.声明端口号，开启服务
@@ -70,7 +85,7 @@ const server = http.createServer();
     如果host省略，如果IPv6可用，服务器将会接收基于upspecified IPv6 address (::) 的连接，否则接收基于unspecified IPV4 address（0）
 */
 server.listen(devWebpackConfig.devServer.port, function () {
-    console.log(chalk.blue(`Your application is running here: ${devWebpackConfig.devServer.host}:${devWebpackConfig.devServer.port}`));
+    console.log(chalk.blue.bold(`Your application is running here ${devWebpackConfig.devServer.host}:${devWebpackConfig.devServer.port}`));
 });
 
 /* 
@@ -90,53 +105,6 @@ server.listen(devWebpackConfig.devServer.port, function () {
     response: response是一个 响应对象，可以用来给请求发送响应
 */
 
-server.on('request', function (request, response) {
-    let url = request.url;
-    const viewPath = `${__dirname}/views`;
-    
-    // console.log('lalalala',viewPath+ url,  fs.existsSync(viewPath+ url));
-    if (url === '/') {
-        // response.writeHead(响应状态码，相应头对象)：发送一个像迎头给请求
-        response.writeHead(200, {'Content-Type': 'text/html'})
-        // 如果url='/'， 读取指定文件下的html文件，渲染到页面
-        fs.readFile(viewPath + '/index.html','utf-8', function (err, data) {
-            if (err) throw err;
-            response.end(data);
-        })
-    } else  if ( url  && fs.existsSync(viewPath + url +'.html')) {
-        response.writeHead(200, {'Content-Type': 'text/html'});
-        fs.readFile(viewPath + url+'.html','utf-8', function (err, data) {
-            if (err) throw err;
-            response.end(data);
-        })
-    } 
-    else if(fs.existsSync(`${__dirname}/public`+url)){ // fs.existsSync 同步检查 文件是否存在
-        fs.readFile(`${__dirname}/public`+url, function(err, data) {
-            if (err) throw err;
-            response.end(data);
-        })
-    }else{
-        response.writeHead(200, {'Content-Type': 'text/html'});
-        // 如果 url= '/'， 读取指定文件下的html文件， 渲染到页面
-        fs.readFile( viewPath + '/404.html', function(err, data) {
-            if (err) throw err;
-            response.end(data);
-        })
-    }
-});
+server.on('request', newServer);
 
-// else if (url === '/login') {
-//     response.writeHead(200, {'Content-Type': 'text/html'});
-//     // 如果url= '/'，读取指定文件下的html文件，渲染到页面
-//     fs.readFile( viewPath + '/login.html', 'UTF8', function (err, data) {
-//         if (err) throw err;
-//         response.end(data);
-//     })
-// } else if (url === '/index') {
-//     response.writeHead(200, {'Content-Type': 'text.html'});
-//     // 如果url='/' ，读取指定文件下的html文件，渲染到页面
-//     fs.readFile(viewPath + '/index.html','UTF8', function(err, data) {
-//         if (err) throw err;
-//         response.end(data);
-//     })
-// }
+// 
