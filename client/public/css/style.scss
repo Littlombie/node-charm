@@ -9,6 +9,9 @@ body {
 .container {
     text-align: center;
 }
+.h1-welcome{
+    color: #fff;
+}
 .home-icon {
     display: block;
     margin: 20px auto 30px;
@@ -30,28 +33,4 @@ body {
             }
         }
     } 
-}
-
-/* login */
-#login.container {
-    position: relative;
-    z-index: 100;
-    margin: 200px auto;
-    width: 500px;
-    h2 {
-        display: block;
-        margin: 20px auto;
-        color: #fff;
-    }
-    .login-contect {
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        box-shadow: 1px 0px 5px #ccc;
-        padding: 30px 20px;
-        text-align: left;
-        background: #fff;
-        a#submit {
-            color: #fff;
-        }
-    }
 }
