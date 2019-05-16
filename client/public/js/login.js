@@ -1,6 +1,5 @@
 
 window.onload = function () {
-    console.log($('body'));
     $.ajax({
         method: 'GET',
         url: '../data/test.json',
@@ -52,6 +51,7 @@ window.onload = function () {
                 if (resp.errno === 0) {
                     console.log('登录成功！');
                     Cookies.set('username', data.username);
+                    window.location.href="/index"
                 } else {
                     console.log(resp);
                     error.innerHTML = resp['message'];

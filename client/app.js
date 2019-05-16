@@ -10,7 +10,6 @@ const path = require('path');
 const ipArr = require('../project/26-os/01-getIp');
 const queryString = require('querystring');
 const newServer = require('./router/page');
-const user = require('./router/user.js');
 
 // 设置输出的颜色样式
 const colors = require('colors');
