@@ -4,29 +4,34 @@ const handleUserRouter = require('./router/user');
 
 // 用于处理post data 
 const getPostData = (req) => {
+    console.log(req.method);
     const promise = new Promise ((resolve, reject) => {
         // 判断不是post请求
         if (req.method !== 'POST') {
+            console.log(1);
             resolve({});
             return;
         }
-        // console.log(req.headers);
-        if (req.headers['content-type'] !== 'application/json') {
-            resolve({});
-            return;
-        }
+        console.log(req.headers);
+        // if (req.headers['content-type'] !== 'application/json') {
+        //     console.log(2);
+        //     resolve({});
+        //     return;
+        // }
 
         let postData = '';
         req.on('data', chunk => {
             postData += chunk.toString();
         })
         req.on('end', () => {
+            console.log(postData);
             if (!postData) {
                 resolve({});
                 return;
             }
             resolve(
-              JSON.parse(postData)
+                // JSON.parse(postData)
+                queryString.parse(postData)
             )
         })
         
@@ -48,6 +53,7 @@ const serverHandle = (req, res) => {
     req.query = queryString.parse(url.split('?')[1]);
 
     getPostData(req).then(postData => {
+        console.log(postData);
         req.body = postData;
 
         // 处理user路由
