@@ -1,3 +1,4 @@
+
 window.onload = function () {
     console.log($('body'));
     $.ajax({
@@ -9,7 +10,6 @@ window.onload = function () {
             console.log(resp);
             if (resp) {
                 var datas = resp.content;
-                console.log(datas);
             }
         },
         fail: function (err) {
@@ -44,23 +44,20 @@ window.onload = function () {
         data.password = valid(password);
         console.log(data);
         $.ajax({
-            method:'POST',
-            url: 'http://192.168.0.103:5555/api/user/login',
+            type:'POST',
+            url: 'http://localhost:5555/api/user/login',
             data: data,
-            dataType: 'json',
-            headers: {
-                Accept: "application/json; charset=utf-8",
-                'Content-Type': "application/json; charset=utf-8"
-            },
+            // beforeSend
             success: function (resp) {
-                if (resp.errno === '0') {
+                if (resp.errno === 0) {
                     console.log('登录成功！');
+                    Cookies.set('username', data.username);
                 } else {
                     console.log(resp);
                     error.innerHTML = resp['message'];
                 }
             },
-            fail: function (err) {
+            error: function (err) {
                 throw err;
             }
         });
