@@ -31,6 +31,7 @@ const getPostData = (req) => {
             }
             resolve(
                 // JSON.parse(postData)
+                // querystring.parse() 方法将 URL 查询字符串 str 解析为键值对的集合
                 queryString.parse(postData)
             )
         })
