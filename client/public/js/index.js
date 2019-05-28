@@ -1,4 +1,4 @@
-import os  from './os.js';
+
 
 (function () {
     var username = Cookies.get('username');
@@ -14,7 +14,7 @@ import os  from './os.js';
         document.querySelector('.info span'),
         document.querySelector('.info-list')
     ]
-    console.log(os);
+    os();
     let show = false;
 
     infoBtn.addEventListener('click', function () {

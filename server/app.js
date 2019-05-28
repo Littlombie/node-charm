@@ -4,7 +4,7 @@ const handleUserRouter = require('./router/user');
 const newOs = require('./static/os.js');
 
 
-console.log('os', newOs);
+// console.log('os', newOs);
 // 用于处理post data 
 const getPostData = (req) => {
     console.log(req.method);
