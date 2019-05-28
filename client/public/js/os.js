@@ -1,14 +1,19 @@
-$(function () {
+const os =  function () {
+    let con = '';
     axios({
-        type:'get',
-        url:'./json/os.json',
+        type: 'get',
+        url: './json/os.json',
         dataType: 'json'
-    }).then ( function (resp) {
-        if (resp.status == 200){
-            const con = resp.data.constants;
+    }).then(function (resp) {
+        if (resp.status == 200) {
+            con = resp.data.constants;
             console.log(con);
+            return con;
         }
-    }).catch (function (err) {
+    }).catch(function (err) {
         console.log(err);
     })
-})
+
+}
+
+export default os;

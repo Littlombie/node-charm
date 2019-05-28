@@ -5,7 +5,7 @@ const server = (request, response) => {
     let url = request.url;
     const reDir = request.viewPath;
     
-    console.log('lalalala', request.path, request.viewPath + url,  fs.existsSync(request.viewPath + url));
+    // console.log('lalalala', request.path, request.viewPath + url,  fs.existsSync(request.viewPath + url));
     if (url === '/') {
         // response.writeHead(响应状态码，相应头对象)：发送一个像迎头给请求
         response.writeHead(200, {'Content-Type': 'text/html'})
