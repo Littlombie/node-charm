@@ -1,4 +1,4 @@
-const os =  function () {
+function os() {
     let con = '';
     axios({
         type: 'get',
@@ -14,3 +14,6 @@ const os =  function () {
         console.log(err);
     })
 }
+const newOs =  os;
+const name = 'zhangsan';
+export default { name};

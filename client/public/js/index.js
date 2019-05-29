@@ -1,20 +1,19 @@
 
 
-(function () {
     var username = Cookies.get('username');
     const [navList,btnLogin] = [
         document.querySelector('.nav-list'),
         document.querySelector('.btn-login')
     ];
     if(username) {
-        console.log(1);
         navList.removeChild(btnLogin);
     }
     const [infoBtn, infoList ] = [
         document.querySelector('.info span'),
         document.querySelector('.info-list')
     ]
-    os();
+//    var newOs =  os;
+//    newOs();
     let show = false;
 
     infoBtn.addEventListener('click', function () {
@@ -26,4 +25,3 @@
             show = false;
         }
     });
-})()
