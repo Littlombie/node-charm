@@ -1,5 +1,7 @@
 
-
+import os from './os.js';
+    
+    
     var username = Cookies.get('username');
     const [navList,btnLogin] = [
         document.querySelector('.nav-list'),
@@ -12,8 +14,8 @@
         document.querySelector('.info span'),
         document.querySelector('.info-list')
     ]
-//    var newOs =  os;
-//    newOs();
+   var newOs =  os;
+   newOs();
     let show = false;
 
     infoBtn.addEventListener('click', function () {

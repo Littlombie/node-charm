@@ -1,6 +1,6 @@
 const fs = require('fs');
 const http = require('http');
-
+const path = require('path');
 const server = (request, response) => {
     let url = request.url;
     const reDir = request.viewPath;
@@ -21,9 +21,10 @@ const server = (request, response) => {
             response.end(data);
         })
     } 
-    else if(fs.existsSync(`${reDir}/public`+url)){ // fs.existsSync 同步检查 文件是否存在
-        fs.readFile(`${reDir}/public`+url, function(err, data) {
+    else if(fs.existsSync(`${reDir}/public${url}`)){ // fs.existsSync 同步检查 文件是否存在
+        fs.readFile(`${reDir}/public${url}`, function(err, data) {
             if (err) throw err;
+            path.extname(url) == '.js' && response.writeHead(200, {'Content-Type': 'text/javascript'}); // 如果url的后缀为.js 则以js文件渲染 （本问题解决了 mime 的错误信息）
             response.end(data);
         })
     }else{
