@@ -1,10 +1,9 @@
 
 const queryString = require('querystring');
 const handleUserRouter = require('./router/user');
-const newOs = require('./static/os.js');
+const handleOs = require('./router/os');
+// const newOs = require('./static/os.js');
 
-
-// console.log('os', newOs);
 // 用于处理post data 
 const getPostData = (req) => {
     console.log(req.method);
@@ -57,8 +56,16 @@ const serverHandle = (req, res) => {
     req.query = queryString.parse(url.split('?')[1]);
 
     getPostData(req).then(postData => {
-        console.log(postData);
+        console.log('sss',postData);
         req.body = postData;
+
+        const osData = handleOs(req, res);
+        if (osData) {
+            res.end(
+                JSON.stringify(osData)
+            )
+            return;
+        }
 
         // 处理user路由
         const userData = handleUserRouter(req, res);
@@ -66,8 +73,8 @@ const serverHandle = (req, res) => {
             res.end (
                 JSON.stringify(userData)
             )
+            return;
         }
-        return;
     })
 }
 

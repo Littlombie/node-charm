@@ -4,5 +4,5 @@ const  ifaces = os.networkInterfaces();
 
 const newOs = ifaces;
 
-console.log('www', newOs);
+// console.log('www', newOs);
 module.exports  = os;

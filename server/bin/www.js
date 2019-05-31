@@ -3,11 +3,11 @@ const http = require('http');
 const chalk = require('chalk');
 
 const serverHandle = require('../app');
-const ipArr = require('../../project/26-os/01-getIp');
+const ipArr = require('./getIp');
 
 let hosts = '';
-if (ipArr.length > 0) {
-    hosts = ipArr[0];
+if (ipArr && ipArr !== '') {
+    hosts = ipArr;
 }
 
 
