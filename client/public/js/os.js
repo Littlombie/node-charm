@@ -22,27 +22,47 @@ const os = function os() {
 }
 
 function insertDrame(data) {
-    // let fragment = document.createDocumentFragment(); //创建文档片段
+    let fragment = document.createDocumentFragment(); //创建文档片段
     const arr = Object.keys(data);
-    // console.log(data[arr[1]]);
-    let html = '';
-    for (let i in data) {
-        // let dl = document.createElement('dl');
-        if (data[i].name) {
-            // console.log(data[i].name)
-            html += `<dl>
-            <dt>${data[i].name}：</dt>
-            <dd>${data[i].cpuslist[0].model}</dd>
-            </dl>
-            `;
+    arr.forEach(v => {
+        let dl = document.createElement('dl');
+        if(data[v].name) {
+            dl.innerHTML = `
+            <dt>${data[v].name}：</dt>
+            <dd>${data[v].cpuslist[0].model}</dd>
+            `
         } else {
-            html += `<dl>
-            <dt>${data[i].split('-')[0]}：</dt>
-            <dd>${data[i].split('-')[1]}</dd>
-            </dl>
-            `;
+            dl.innerHTML=`
+            <dt>${data[v].split('-')[0]}：</dt>
+            <dd>${data[v].split('-')[1]}</dd>
+            `
         }
-    }
-    return html;
+        fragment.appendChild(dl);
+        // console.log(v, data[v]);
+    })
+    // console.log(fragment);
+    return fragment;
+    
+    // let html = '';
+    // for (let i in data) {
+    //     // let dl = document.createElement('dl');
+    //     if (data[i].name) {
+    //         // console.log(data[i].name)
+    //         html += `<dl>
+    //         <dt>${data[i].name}：</dt>
+    //         <dd>${data[i].cpuslist[0].model}</dd>
+    //         </dl>
+    //         `;
+    //     } else {
+    //         html += `<dl>
+    //         <dt>${data[i].split('-')[0]}：</dt>
+    //         <dd>${data[i].split('-')[1]}</dd>
+    //         </dl>
+    //         `;
+    //     }
+    // }
+    // return html;
 }
 export default os;
+
+

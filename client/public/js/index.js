@@ -18,11 +18,13 @@ const [infoBtn, infoList] = [
 
 let show = false;
 
-infoBtn.addEventListener('click', function () {
+infoBtn.addEventListener('click', function (e) {
+    e.stopPropagation();
     if (!show) {
         infoList.style.cssText = "display: block";
         osInfo.then(data => {
-            infoList.innerHTML = data;
+            // infoList.innerHTML = data;
+            infoList.appendChild(data);
         });
         show = true;
     } else {
@@ -30,3 +32,10 @@ infoBtn.addEventListener('click', function () {
         show = false;
     }
 });
+
+document.addEventListener('click', function () {
+    if (show) {
+        infoList.style.cssText = "display: none";
+        show = false;
+    }
+})
