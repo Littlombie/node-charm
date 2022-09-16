@@ -14,7 +14,7 @@
     "dependencies": {
         "anywhere": "^1.5.0",
         "axios": "^0.18.0",
-        "bootstrap": "^3.3.5",
+        "bootstrap": "^3.4.1",
         "chalk": "^2.4.1",
         "zip-local": "^0.3.4"
     },
